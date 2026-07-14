@@ -6,5 +6,3 @@ class Deposit extends Operations {
         this.value = this.valueValidator(value)
     }
 }
-
-console.log(new Deposit(20))

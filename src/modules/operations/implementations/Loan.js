@@ -31,6 +31,3 @@ export default class Loan extends Operations {
     }
 
 }
-
-const loan = new Loan(20,12)
-console.log(loan)
