@@ -1,4 +1,4 @@
-import Operations from "./Operations.js"
+import Operations from "../Operations.js"
 
 class Transfer extends Operations {
   constructor(senderUser, recipientUser, value) {

@@ -1,4 +1,4 @@
-import Operations from "./Operations.js"
+import Operations from "../Operations.js"
 
 class Deposit extends Operations {
     constructor(value){
@@ -6,3 +6,5 @@ class Deposit extends Operations {
         this.value = this.valueValidator(value)
     }
 }
+
+console.log(new Deposit(20))
