@@ -1,18 +1,8 @@
-import dayjs from "dayjs"
+import Operations from "./Operations.js"
 
-class Deposit {
+class Deposit extends Operations {
     constructor(value){
-        const now = dayjs()
-        this.value = this.inputValidator(value)
-        this.createdAt = now.format('DD/MM/YY HH:mm:ss')
+        super()
+        this.value = this.valueValidator(value)
     }
-
-    inputValidator(value){
-        if (typeof(value) !== 'number'){
-            throw new Error('O valor de entrada deve ser um número 0.00')
-        } else {
-            return value.toFixed(2)
-        }
-    }
-
 }
