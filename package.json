@@ -15,10 +15,13 @@
     "url": "git+https://github.com/tiagograff/digital-bank-js.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "tiagograff",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/tiagograff/digital-bank-js/issues"
   },
-  "homepage": "https://github.com/tiagograff/digital-bank-js#readme"
+  "homepage": "https://github.com/tiagograff/digital-bank-js#readme",
+  "dependencies": {
+    "dayjs": "^1.11.21"
+  }
 }
