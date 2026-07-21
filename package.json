@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/tiagograff/digital-bank-js#readme",
   "dependencies": {
-    "dayjs": "^1.11.21"
+    "dayjs": "^1.11.21",
+    "nanoid": "^6.0.0"
   }
 }
