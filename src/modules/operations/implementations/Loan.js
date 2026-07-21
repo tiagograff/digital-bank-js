@@ -5,8 +5,9 @@ export default class Loan extends Operations {
   static #newInterest = null;
   static #interestRate = 0.02;
 
-  constructor(value, nro_installment) {
+  constructor(id, value, nro_installment) {
     super();
+    this.id = id
     this.value = value;
     this.loanInstallments = new Installment(nro_installment, value);
   }
