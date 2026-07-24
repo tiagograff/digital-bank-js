@@ -1,16 +1,18 @@
 import Loan from "../modules/accounts/Loan.js";
-import generateNumericId from "../utils/generateNumericId.js";
-const loans = []
+import Admin from "../modules/users/Admin.js";
+import {generateNumericIdOperations} from "../utils/generateNumericId.js";
+const accounts = []
 
 class App{
     constructor(){
-
+        this.admin = new Admin('Admin', 'admin@admin.com')
     }
-    createNewLoan(valueOfLoan, nroInstallment){
-        const newId = generateNumericId()
-        if (!this.#validatedNewObject(newId, 'loan')){
+
+    createNewLoan(requester, valueOfLoan, nroInstallment){
+        const newId = generateNumericIdOperations()
+        if (!this.validatedLoan(requester, newId)){
             const newLoan = new Loan(newId, valueOfLoan, nroInstallment)
-            loans.push(newLoan)
+            requester.loans.push(newLoan)
             return newLoan
         }else{
             throw new Error('ID duplicado tente novamente')
@@ -18,13 +20,13 @@ class App{
 
     }
 
-    #validatedNewObject(id, list){
-        if (list === 'loan'){
-             return loans.some(loan => loan.id === id)
-        } else{
-            throw new Error('Operação não existe')
-        }
+    findUserById(userId){
+        return accounts.find(account => account.id === userId)
+    }
+
+    validatedLoan(requester, id){
+        return requester.loans.some(loan => loan.id === id)
     }
 }
 
-export {App, loans}
+export {App, accounts}
