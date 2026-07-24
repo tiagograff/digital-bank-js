@@ -1,8 +1,12 @@
 # Arquitetura
 
-O projeto foi dividido em camadas para reduzir acoplamento entre as partes da aplicação.
+O projeto segue uma arquitetura orientada a objetos organizada por domínio, separando entidades do sistema, operações bancárias e componentes de orquestração.
 
-## Fluxo geral
+O objetivo é manter alta coesão entre as classes e baixo acoplamento entre os módulos, facilitando a manutenção e a evolução da aplicação.
+
+---
+
+# Fluxo geral
 
 Interface
 
@@ -12,7 +16,7 @@ App
 
 ↓
 
-User
+User / Admin
 
 ↓
 
@@ -20,16 +24,38 @@ Account
 
 ↓
 
-Operações
+Operações ou Empréstimos
 
 - Deposit
 - Transfer
 - Loan
-- Installment
+  - Installment
 
 A interface apenas solicita operações.
 
-Toda regra de negócio permanece nas classes.
+A `App` coordena a aplicação, localizando os objetos necessários e delegando as regras de negócio para as entidades responsáveis.
+
+---
+
+# Organização dos módulos
+
+```
+modules
+├── accounts
+│   ├── Account.js
+│   ├── Installment.js
+│   └── Loan.js
+│
+├── operations
+│   ├── Operations.js
+│   └── implementations
+│       ├── Deposit.js
+│       └── Transfer.js
+│
+└── users
+    ├── Admin.js
+    └── User.js
+```
 
 ---
 
@@ -37,31 +63,39 @@ Toda regra de negócio permanece nas classes.
 
 ## App
 
-Responsável por coordenar toda a aplicação.
+Responsável pela orquestração da aplicação.
 
-Funções:
+Responsabilidades:
 
-- cadastrar usuários
-- localizar usuários
-- iniciar operações bancárias
-- alterar configurações globais
+- cadastrar usuários;
+- localizar entidades por identificador;
+- coordenar operações do sistema;
+- armazenar as coleções principais da aplicação.
 
-Não representa uma entidade do banco.
-
-Funciona como controlador da aplicação.
+A `App` não implementa regras de negócio das entidades.
 
 ---
 
 ## User
 
-Representa um cliente.
+Representa um cliente do banco.
 
 Responsabilidades:
 
-- armazenar informações pessoais
-- possuir uma conta
+- armazenar informações do usuário;
+- possuir uma conta bancária.
 
-Não executa operações bancárias.
+---
+
+## Admin
+
+Especialização de `User`.
+
+Responsabilidades:
+
+- executar operações administrativas;
+- alterar configurações globais do sistema;
+- gerenciar recursos administrativos.
 
 ---
 
@@ -71,56 +105,26 @@ Representa uma conta bancária.
 
 Responsabilidades:
 
-- controlar saldo
-- armazenar depósitos
-- armazenar empréstimos
-- armazenar transferências
-- manter histórico das operações
+- controlar saldo;
+- armazenar empréstimos;
+- registrar operações financeiras.
 
 Toda movimentação financeira ocorre através da conta.
 
 ---
 
-## Deposit
-
-Representa um depósito realizado.
-
-Responsabilidades:
-
-- valor
-- data
-
-Não altera saldo diretamente.
-
----
-
-## Transfer
-
-Representa uma transferência.
-
-Responsabilidades:
-
-- remetente
-- destinatário
-- valor
-- data
-
-Não conhece regras da conta.
-
----
-
 ## Loan
 
-Representa um empréstimo.
+Representa um contrato de empréstimo.
 
 Responsabilidades:
 
-- valor solicitado
-- taxa de juros
-- data
-- parcelas
+- controlar o valor emprestado;
+- calcular juros;
+- controlar parcelas;
+- atualizar o estado do empréstimo.
 
-Responsável pelo cálculo do parcelamento.
+Cada empréstimo pertence a uma conta.
 
 ---
 
@@ -130,65 +134,78 @@ Representa uma parcela de um empréstimo.
 
 Responsabilidades:
 
-- número
-- valor
-- status
+- armazenar número da parcela;
+- armazenar valor;
+- controlar o estado da parcela.
 
-Cada empréstimo possui diversas parcelas.
+Cada parcela pertence a um único empréstimo.
+
+---
+
+## Operations
+
+Classe base para abstração das operações bancárias.
+
+Centraliza comportamentos compartilhados entre as operações.
+
+---
+
+## Deposit
+
+Representa um depósito.
+
+Responsabilidades:
+
+- armazenar informações da operação;
+- representar um depósito realizado.
+
+---
+
+## Transfer
+
+Representa uma transferência.
+
+Responsabilidades:
+
+- armazenar origem;
+- armazenar destino;
+- armazenar valor;
+- representar uma transferência realizada.
 
 ---
 
 # Relações
 
+```
 App
-
-↓
-
-gerencia
-
-↓
-
-Users
-
-↓
-
-possuem
-
-↓
-
-Account
-
-↓
-
-contém
-
-↓
-
-Deposits
-
-Transfers
-
-Loans
-
-↓
-
-Loan
-
-↓
-
-gera
-
-↓
-
-Installments
+│
+├── users[]
+│
+├── User
+│     │
+│     ▼
+│   Account
+│     │
+│     ├── Loan
+│     │      │
+│     │      ▼
+│     │  Installment
+│     │
+│     └── Operations
+│            ├── Deposit
+│            └── Transfer
+│
+└── Admin
+```
 
 ---
 
 # Princípios utilizados
 
+- Orientação a Objetos
 - Encapsulamento
-- Responsabilidade única
+- Responsabilidade Única (SRP)
+- Composição entre objetos
 - Baixo acoplamento
 - Alta coesão
-- Composição entre objetos
-- Modularização
+- Modularização por domínio
