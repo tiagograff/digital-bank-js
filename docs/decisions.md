@@ -41,3 +41,24 @@ O Git será utilizado seguindo boas práticas de commits e histórico de altera�
 - Facilita acompanhamento da evolução do projeto.
 - Mantém rastreabilidade das alterações.
 - Simula um fluxo profissional de desenvolvimento.
+
+# ADR-002 - Organização por domínio
+
+## Contexto
+
+O projeto inicialmente agrupava as classes de acordo com o tipo de implementação, o que dificultava identificar a relação entre as entidades do domínio bancário.
+
+## Decisão
+
+As classes passaram a ser organizadas por domínio:
+
+- users
+- accounts
+- operations
+
+## Consequências
+
+- Maior coesão.
+- Melhor escalabilidade.
+- Estrutura mais próxima de aplicações reais.
+- Facilita futuras implementações de novos tipos de conta e empréstimos.
