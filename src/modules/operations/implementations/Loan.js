@@ -4,20 +4,36 @@ import Installment from "./Installment.js";
 export default class Loan extends Operations {
   static #newInterest = null;
   static #interestRate = 0.02;
-  static totalValueLoan = null
+  static totalValueLoan = null;
 
   constructor(id, value, nro_installment) {
     super();
-    this.id = id
+    this.id = id;
     this.value = value;
     this.loanInstallments = new Installment(nro_installment, value);
-    const installment = this.loanInstallments
-    this.totalValueLoan = installment.number * installment.value
-    
+    const installment = this.loanInstallments;
+    this.totalValueLoan = installment.number * installment.value;
   }
 
   static get interestRate() {
     return Loan.#interestRate;
+  }
+
+  //mostrar empréstimos
+  get showLoanSummary() {
+    if (!this.loanInstallments) {
+      throw new Error("Sem registros de parcelas");
+    } else {
+      return console.log(
+        `Sobre o Empréstimo:
+- Valor pego: ${this.value}
+- Juros: ${this.loanInstallments.interestRate}
+- Quantidade de parcelas: ${this.loanInstallments.number}
+- Valor por parcela: ${this.loanInstallments.value}
+- Valor total para pagar: ${this.totalValueLoan}
+`,
+      );
+    }
   }
 
   static set interestRateNewValue(interest_new_porcentage) {
@@ -25,8 +41,9 @@ export default class Loan extends Operations {
   }
 
   static calculateTotalValueOfInstalmment(currentValue) {
-    let currentInterest = this.#newInterest ?? this.#interestRate;
-    return currentValue * (1 + currentInterest);
+    const interestRate = this.#newInterest ?? this.#interestRate;
+    const installmentValue = currentValue * (1 + interestRate);
+    return {interestRate, installmentValue}
   }
 
   payAnInstallment(valueToPay) {
@@ -34,14 +51,18 @@ export default class Loan extends Operations {
       throw new Error(
         `Este valor não condiz com o valor da parcela, que é de R$: ${this.value.toFixed(2)}`,
       );
-    } else if (valueToPay === installment.value && installment.number != 0){
-      this.totalValueLoan -= valueToPay
-      installment.number--
+    } else if (valueToPay === installment.value && installment.number != 0) {
+      this.totalValueLoan -= valueToPay;
+      installment.number--;
       installment.checkStatus();
-    }else if (valueToPay === installment.value && installment.number === 0 && installment.status === 'Pago'){
-      throw new Error('Não há mais parcelas para pagar')
-    }else{
-      throw new Error('Erro inesperado')
+    } else if (
+      valueToPay === installment.value &&
+      installment.number === 0 &&
+      installment.status === "Pago"
+    ) {
+      throw new Error("Não há mais parcelas para pagar");
+    } else {
+      throw new Error("Erro inesperado");
     }
   }
 }

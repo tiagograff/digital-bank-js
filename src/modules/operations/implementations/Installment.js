@@ -4,7 +4,10 @@ import Loan from "./Loan.js";
 export default class Installment extends Operations {
   constructor(number, currentValue) {
     super();
-    this.value = Loan.calculateTotalValueOfInstalmment(currentValue);
+    const { interestRate, installmentValue } =
+      Loan.calculateTotalValueOfInstalmment(currentValue);
+    this.interestRate = interestRate;
+    this.value = installmentValue;
     this.number = this.#validateNumOfInstallments(number);
     this.status = "Pendente";
   }

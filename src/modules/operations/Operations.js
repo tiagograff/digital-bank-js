@@ -23,17 +23,4 @@ export default class Operations {
       return user;
     }
   }
-
-  //mostrar empréstimos
-  get showLoanSummary() {
-    if (!this.loanInstallments) {
-      throw new Error("Sem registros de parcelas");
-    } else {
-      return `Sobre o Empréstimo:
-  Valor inicial: ${this.value}
-  Quantidade de parcelas: ${this.loanInstallments.number}
-  Valor por parcela: ${this.loanInstallments.value}
-  Valor total para pagar: ${this.loanInstallments.value * this.loanInstallments.number})`;
-    }
-  }
 }
