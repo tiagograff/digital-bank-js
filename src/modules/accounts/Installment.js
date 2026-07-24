@@ -1,4 +1,4 @@
-import Operations from "../Operations.js";
+import Operations from "../operations/Operations.js";
 import Loan from "./Loan.js";
 
 export default class Installment extends Operations {

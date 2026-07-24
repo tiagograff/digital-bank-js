@@ -1,4 +1,4 @@
-import Operations from "../Operations.js";
+import Operations from "../operations/Operations.js";
 import Installment from "./Installment.js";
 
 export default class Loan extends Operations {
@@ -11,8 +11,7 @@ export default class Loan extends Operations {
     this.id = id;
     this.value = value;
     this.loanInstallments = new Installment(nro_installment, value);
-    const installment = this.loanInstallments;
-    this.totalValueLoan = installment.number * installment.value;
+    this.totalValueLoan = this.loanInstallments.number * this.loanInstallments.value;
   }
 
   static get interestRate() {
@@ -46,18 +45,18 @@ export default class Loan extends Operations {
   }
 
   payAnInstallment(valueToPay) {
-    if (valueToPay !== installment.value) {
+    if (valueToPay !== this.loanInstallments.value) {
       throw new Error(
         `Este valor não condiz com o valor da parcela, que é de R$: ${this.value.toFixed(2)}`,
       );
-    } else if (valueToPay === installment.value && installment.number != 0) {
+    } else if (valueToPay === this.loanInstallments.value && this.loanInstallments.number != 0) {
       this.totalValueLoan -= valueToPay;
-      installment.number--;
-      installment.checkStatus();
+      this.loanInstallments.number--;
+      this.loanInstallments.checkStatus();
     } else if (
-      valueToPay === installment.value &&
-      installment.number === 0 &&
-      installment.status === "Pago"
+      valueToPay === this.loanInstallments.value &&
+      this.loanInstallments.number === 0 &&
+      this.loanInstallments.status === "Pago"
     ) {
       throw new Error("Não há mais parcelas para pagar");
     } else {
