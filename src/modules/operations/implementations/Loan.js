@@ -19,8 +19,7 @@ export default class Loan extends Operations {
     return Loan.#interestRate;
   }
 
-  //mostrar empréstimos
-  get showLoanSummary() {
+  get summary() {
     if (!this.loanInstallments) {
       throw new Error("Sem registros de parcelas");
     } else {
