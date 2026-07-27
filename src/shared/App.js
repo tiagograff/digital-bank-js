@@ -20,8 +20,12 @@ class App{
 
     }
 
-    findUserById(userId){
+    static findUserById(userId){
         return accounts.find(account => account.id === userId)
+    }
+    
+    static hasAccount(id){
+        return accounts.some((account => account.nroAccount === id))
     }
 
     validatedLoan(requester, id){
