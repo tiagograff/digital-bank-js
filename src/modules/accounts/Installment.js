@@ -6,10 +6,10 @@ export default class Installment extends Operations {
     super();
     const { interestRate, installmentValue } =
       Loan.calculateTotalValueOfInstalmment(currentValue);
-    this.interestRate = interestRate;
-    this.value = installmentValue;
-    this.number = this.#validateNumOfInstallments(number);
-    this.status = "Pendente";
+      this.interestRate = interestRate;
+      this.value = installmentValue;
+      this.number = this.#validateNumOfInstallments(number);
+      this.status = "Pendente";
   }
 
   checkStatus() {

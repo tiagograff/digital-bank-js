@@ -9,4 +9,8 @@ export default class Account extends User{
         this.deposits = []
         this.transfers = []
     }
+
+    get showBalance(){
+        console.log(this.#balance)
+    }
 }
