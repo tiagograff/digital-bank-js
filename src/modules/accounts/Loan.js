@@ -43,12 +43,13 @@ export default class Loan extends Operations {
   payAnInstallment(valueToPay) {
     if (valueToPay !== this.loanInstallments.value) {
       throw new Error(
-        `Este valor não condiz com o valor da parcela, que é de R$: ${this.value.toFixed(2)}`,
+        `Este valor é a baixo da parcela, que é de R$: ${this.value.toFixed(2)}`,
       );
     } else if (valueToPay === this.loanInstallments.value && this.loanInstallments.number != 0) {
       this.totalValueLoan -= valueToPay;
       this.loanInstallments.number--;
       this.loanInstallments.checkStatus();
+      return
     } else if (
       valueToPay === this.loanInstallments.value &&
       this.loanInstallments.number === 0 &&

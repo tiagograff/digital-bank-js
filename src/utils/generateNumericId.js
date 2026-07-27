@@ -2,11 +2,11 @@ import { customAlphabet } from "nanoid";
 
 const numbers = '0123456789'
 
-function generateNumericIdOperations(length = 10){
-    return customAlphabet(numbers, length)()
+function generateNumericIdOperations(length = 3){
+    return `loan`+customAlphabet(numbers, length)()
 }
 
-function generateNumericIdAccounts(length = 5){
+function generateNumericIdAccounts(length = 4){
     return `acc`+customAlphabet(numbers, length)()
 }
 

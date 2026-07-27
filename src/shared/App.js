@@ -48,6 +48,10 @@ class App {
     return requester.loans.some((loan) => loan.id === id);
   }
 
+  static findLoanById(user, loanId){
+    return user.loans.find((loan => loan.id === loanId))
+  }
+
   static valueValidator(value) {
     if (typeof value !== "number" || isNaN(value)) {
       throw new Error("O valor de entrada deve ser um número 0000.00");
