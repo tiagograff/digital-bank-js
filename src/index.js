@@ -3,4 +3,12 @@ import {App, accounts} from "./shared/App.js";
 
 const bank = new App
 
-bank.admin.createAccount('tiago','email')
+const tiago = bank.admin.createAccount('tiago','email')
+tiago.requestLoan()
+bank.admin.aprovateLoan(tiago, 'Aprovado')
+bank.admin.interestRateNewValue = 20
+bank.createNewLoan(tiago, 200, 13)
+tiago.requestLoan()
+bank.admin.aprovateLoan(tiago, 'Reprovado')
+bank.createNewLoan(tiago, 100, 12)
+console.log(tiago)

@@ -2,7 +2,7 @@ import Operations from "../operations/Operations.js";
 import Installment from "./Installment.js";
 
 export default class Loan extends Operations {
-  static #newInterest = null;
+  static newInterest = null;
   static #interestRate = 0.02;
   static totalValueLoan = null;
 
@@ -34,12 +34,8 @@ export default class Loan extends Operations {
     }
   }
 
-  static set interestRateNewValue(interest_new_porcentage) {
-    this.#newInterest = interest_new_porcentage / 100;
-  }
-
   static calculateTotalValueOfInstalmment(currentValue) {
-    const interestRate = this.#newInterest ?? this.#interestRate;
+    const interestRate = this.newInterest ?? this.#interestRate;
     const installmentValue = currentValue * (1 + interestRate);
     return {interestRate, installmentValue}
   }

@@ -9,13 +9,22 @@ class App {
   }
 
   createNewLoan(requester, valueOfLoan, nroInstallment) {
-    const newId = generateNumericIdOperations();
-    if (!this.validatedLoan(requester, newId)) {
-      const newLoan = new Loan(newId, valueOfLoan, nroInstallment);
-      requester.loans.push(newLoan);
-      return newLoan;
+    if (App.lastRequest(requester).status === "Aprovado") {
+      const newId = generateNumericIdOperations();
+      if (!this.validatedLoan(requester, newId)) {
+        const newLoan = new Loan(newId, valueOfLoan, nroInstallment);
+        requester.loans.push(newLoan);
+
+        console.log("Empréstimo aprovado");
+
+        return newLoan;
+      } else {
+        throw new Error("ID duplicado tente novamente");
+      }
+    } else if (App.lastRequest(requester).status === "Reprovado") {
+      console.log("Sua última requisição está reprovada!");
     } else {
-      throw new Error("ID duplicado tente novamente");
+      console.log("Erro/Pendência na última requisição");
     }
   }
 
@@ -27,7 +36,15 @@ class App {
     return accounts.some((account) => account.nroAccount === id);
   }
 
-  static validatedLoan(requester, id) {
+  static lastRequest(requester) {
+    if (requester.requestLoans.length === 0) {
+      throw new Error("Não há requisições de empréstimo nesta conta");
+    } else {
+      return requester.requestLoans[requester.requestLoans.length - 1];
+    }
+  }
+
+  validatedLoan(requester, id) {
     return requester.loans.some((loan) => loan.id === id);
   }
 
