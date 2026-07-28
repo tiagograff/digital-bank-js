@@ -16,3 +16,10 @@ console.log(tiago.showBalance)
 console.log(tiago.allLoansSummary)
 console.log(tiago.showBalance)
 console.log(tiago.deposits)
+
+const outro = bank.admin.createAccount('outraPessoa', 'email')
+outro.deposit = 200
+outro.transfer(tiago, 150)
+console.log(tiago.showBalance)
+console.log(outro.showBalance)
+console.log(outro.transfers)

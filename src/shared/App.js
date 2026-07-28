@@ -62,14 +62,6 @@ class App{
       return value;
     }
   }
-
-  static userValidator(user) {
-    if (typeof user !== "string") {
-      throw new Error("O campo usuário deve ser string");
-    } else {
-      return user;
-    }
-  }
 }
 
 export { App, accounts };

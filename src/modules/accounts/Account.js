@@ -3,6 +3,7 @@ import Deposit from "../operations/implementations/Deposit.js";
 import User from "../users/User.js";
 import dayjs from "dayjs";
 import Loan from "./Loan.js";
+import Transfer from "../operations/implementations/Transfer.js";
 
 export default class Account extends User {
   #balance = null;
@@ -16,7 +17,7 @@ export default class Account extends User {
   }
 
   get showBalance() {
-    return this.#balance;
+    return `Saldo bancário de ${this.name}: ${this.#balance}`;
   }
 
   #payWithBalance(value) {
@@ -28,6 +29,22 @@ export default class Account extends User {
     if(App.valueValidator(newDeposit.value)){
         this.#balance += value
         this.deposits.push(newDeposit)
+    }
+  }
+
+  set #receivePayment(value){
+    this.#balance += value
+  }
+
+  transfer(recipientUser, value){
+    // const recipientUser = App.findUserById(recipientUserId)
+    const newTransfer = new Transfer(this.name, recipientUser.name, value)
+    if (App.valueValidator(newTransfer.value)){
+      this.#balance -= value
+      recipientUser.#receivePayment = value
+      this.transfers.push(newTransfer)
+      recipientUser.transfers.push(newTransfer)
+      console.log(`transferência de ${value} de ${this.name} para ${recipientUser.name} concluída`)
     }
   }
 
