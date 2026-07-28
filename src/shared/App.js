@@ -1,9 +1,10 @@
 import Loan from "../modules/accounts/Loan.js";
+import Operations from "../modules/operations/Operations.js";
 import Admin from "../modules/users/Admin.js";
 import { generateNumericIdOperations } from "../utils/generateNumericId.js";
 const accounts = [];
 
-class App {
+class App{
   constructor() {
     this.admin = new Admin("Admin", "admin@admin.com");
   }

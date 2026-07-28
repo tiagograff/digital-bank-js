@@ -1,8 +1,9 @@
 import Operations from "../Operations.js"
 
-class Deposit extends Operations {
-    constructor(value){
+export default class Deposit extends Operations {
+    constructor(account, value){
         super()
-        this.value = App.valueValidator(value)
+        this.account = account
+        this.value = value
     }
 }

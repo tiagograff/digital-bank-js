@@ -49,7 +49,7 @@ export default class Loan extends Operations {
       this.totalValueLoan -= valueToPay;
       this.loanInstallments.number--;
       this.loanInstallments.checkStatus();
-      return
+      return true
     } else if (
       valueToPay === this.loanInstallments.value &&
       this.loanInstallments.number === 0 &&
