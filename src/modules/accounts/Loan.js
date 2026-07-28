@@ -24,11 +24,13 @@ export default class Loan extends Operations {
     } else {
       return console.log(
         `Sobre o Empréstimo:
+- Identificador: ${this.id}
 - Valor pego: ${this.value}
 - Juros: ${this.loanInstallments.interestRate}
 - Quantidade de parcelas: ${this.loanInstallments.number}
-- Valor por parcela: ${this.loanInstallments.value}
-- Valor total para pagar: ${this.totalValueLoan}
+- Valor por parcela: ${(this.loanInstallments.value).toFixed(2)}
+- Valor total para pagar: ${(this.totalValueLoan).toFixed(2)}
+- Status de pagamento: ${this.loanInstallments.status}
 `,
       );
     }

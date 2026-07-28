@@ -75,4 +75,15 @@ export default class Account extends User {
       }
     }
   }
+
+  loanSummary(loanId){
+    const currentLoan = App.findLoanById(loanId)
+    currentLoan.summary
+  }
+
+   get allLoansSummary(){
+    this.loans.forEach(loan => {
+      loan.summary
+    })
+  }
 }

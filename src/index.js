@@ -6,9 +6,13 @@ const bank = new App
 
 const tiago = bank.admin.createAccount('tiago','email')
 tiago.deposit = 600
+bank.admin.interestRateNewValue = 50
 tiago.requestLoan()
 bank.admin.aprovateLoan(tiago, 'Aprovado')
 bank.createNewLoan(tiago,100,2)
 tiago.payLastLoan()
 tiago.payLastLoan()
 console.log(tiago.showBalance)
+console.log(tiago.allLoansSummary)
+console.log(tiago.showBalance)
+console.log(tiago.deposits)
