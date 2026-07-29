@@ -1,78 +1,93 @@
 # Arquitetura
 
-O projeto segue uma arquitetura orientada a objetos organizada por domínio, separando entidades do sistema, operações bancárias e componentes de orquestração.
+## Visão Geral
 
-O objetivo é manter alta coesão entre as classes e baixo acoplamento entre os módulos, facilitando a manutenção e a evolução da aplicação.
+O projeto foi desenvolvido seguindo os princípios da **Programação Orientada a Objetos (POO)**, buscando representar um domínio bancário através de entidades independentes e bem definidas.
+
+A arquitetura prioriza:
+
+- Baixo acoplamento
+- Alta coesão
+- Encapsulamento
+- Composição entre objetos
+- Responsabilidade única (Single Responsibility Principle)
+
+Cada módulo possui responsabilidades específicas, facilitando a manutenção e futuras expansões do sistema.
 
 ---
 
-# Fluxo geral
+# Fluxo Geral
 
-Interface
-
-↓
-
-App
-
-↓
-
-User / Admin
-
-↓
-
-Account
-
-↓
-
-Operações ou Empréstimos
-
-- Deposit
-- Transfer
-- Loan
-  - Installment
+```text
+Interface (index.js)
+        │
+        ▼
+      App
+        │
+        ▼
+   User / Admin
+        │
+        ▼
+     Account
+      ├──────────────┐
+      ▼              ▼
+ Operations        Loans
+      │              │
+      ▼              ▼
+Deposit         Installment
+Transfer
+```
 
 A interface apenas solicita operações.
 
-A `App` coordena a aplicação, localizando os objetos necessários e delegando as regras de negócio para as entidades responsáveis.
+A classe **App** atua como ponto central da aplicação, coordenando as entidades e delegando as regras de negócio para os objetos responsáveis.
 
 ---
 
-# Organização dos módulos
+# Estrutura dos módulos
 
-```
-modules
-├── accounts
-│   ├── Account.js
-│   ├── Installment.js
-│   └── Loan.js
+```text
+src
+├── modules
+│   ├── accounts
+│   │   ├── Account.js
+│   │   ├── Loan.js
+│   │   └── Installment.js
+│   │
+│   ├── operations
+│   │   ├── Operations.js
+│   │   └── implementations
+│   │       ├── Deposit.js
+│   │       └── Transfer.js
+│   │
+│   ├── users
+│   │   ├── User.js
+│   │   └── Admin.js
+│   │
+│   └── App.js
 │
-├── operations
-│   ├── Operations.js
-│   └── implementations
-│       ├── Deposit.js
-│       └── Transfer.js
+├── utils
 │
-└── users
-    ├── Admin.js
-    └── User.js
+└── index.js
 ```
 
 ---
 
-# Classes
+# Responsabilidades
 
 ## App
 
-Responsável pela orquestração da aplicação.
+Classe responsável pela coordenação da aplicação.
 
 Responsabilidades:
 
 - cadastrar usuários;
 - localizar entidades por identificador;
-- coordenar operações do sistema;
+- validar entidades;
+- coordenar operações entre objetos;
 - armazenar as coleções principais da aplicação.
 
-A `App` não implementa regras de negócio das entidades.
+A classe **App** não implementa regras de negócio específicas das entidades.
 
 ---
 
@@ -82,20 +97,19 @@ Representa um cliente do banco.
 
 Responsabilidades:
 
-- armazenar informações do usuário;
+- armazenar dados do usuário;
 - possuir uma conta bancária.
 
 ---
 
 ## Admin
 
-Especialização de `User`.
+Especialização de **User**.
 
 Responsabilidades:
 
 - executar operações administrativas;
-- alterar configurações globais do sistema;
-- gerenciar recursos administrativos.
+- alterar configurações globais do sistema.
 
 ---
 
@@ -105,9 +119,10 @@ Representa uma conta bancária.
 
 Responsabilidades:
 
-- controlar saldo;
+- controlar o saldo;
+- armazenar operações financeiras;
 - armazenar empréstimos;
-- registrar operações financeiras.
+- controlar movimentações da conta.
 
 Toda movimentação financeira ocorre através da conta.
 
@@ -121,10 +136,11 @@ Responsabilidades:
 
 - controlar o valor emprestado;
 - calcular juros;
-- controlar parcelas;
+- gerar parcelas;
+- controlar o pagamento das parcelas;
 - atualizar o estado do empréstimo.
 
-Cada empréstimo pertence a uma conta.
+Cada empréstimo pertence a uma única conta.
 
 ---
 
@@ -136,7 +152,7 @@ Responsabilidades:
 
 - armazenar número da parcela;
 - armazenar valor;
-- controlar o estado da parcela.
+- controlar o status da parcela.
 
 Cada parcela pertence a um único empréstimo.
 
@@ -144,68 +160,117 @@ Cada parcela pertence a um único empréstimo.
 
 ## Operations
 
-Classe base para abstração das operações bancárias.
+Classe base das operações financeiras.
 
-Centraliza comportamentos compartilhados entre as operações.
+Centraliza características compartilhadas pelas operações concretas.
 
 ---
 
 ## Deposit
 
-Representa um depósito.
+Representa um depósito realizado.
 
 Responsabilidades:
 
-- armazenar informações da operação;
-- representar um depósito realizado.
+- armazenar os dados da operação;
+- representar um depósito financeiro.
 
 ---
 
 ## Transfer
 
-Representa uma transferência.
+Representa uma transferência entre contas.
 
 Responsabilidades:
 
 - armazenar origem;
 - armazenar destino;
 - armazenar valor;
-- representar uma transferência realizada.
+- representar uma transferência financeira.
 
 ---
 
-# Relações
+# Relação entre objetos
 
-```
+```text
 App
 │
 ├── users[]
 │
 ├── User
-│     │
-│     ▼
+│      │
+│      ▼
 │   Account
-│     │
-│     ├── Loan
-│     │      │
-│     │      ▼
-│     │  Installment
-│     │
-│     └── Operations
-│            ├── Deposit
-│            └── Transfer
+│      │
+│      ├── operations[]
+│      │       ├── Deposit
+│      │       └── Transfer
+│      │
+│      └── loans[]
+│              │
+│              ▼
+│        Installments[]
 │
 └── Admin
 ```
 
+A arquitetura utiliza principalmente **composição**, onde objetos são responsáveis por gerenciar seus próprios agregados.
+
 ---
 
-# Princípios utilizados
+# Decisões arquiteturais
 
-- Orientação a Objetos
+Durante o desenvolvimento, algumas decisões foram tomadas para manter o projeto organizado.
+
+### Loan como entidade
+
+Embora represente um produto financeiro, **Loan** não foi modelado como uma operação.
+
+O empréstimo possui:
+
+- identidade;
+- estado;
+- ciclo de vida;
+- regras próprias;
+- relacionamento com parcelas.
+
+Por esse motivo, foi tratado como uma entidade independente da hierarquia de operações.
+
+---
+
+### App como coordenador
+
+A classe **App** centraliza operações globais da aplicação, como:
+
+- busca de entidades;
+- validações;
+- cadastro;
+- coordenação entre objetos.
+
+As regras específicas permanecem encapsuladas nas respectivas entidades.
+
+---
+
+### Organização por domínio
+
+As classes foram agrupadas conforme sua responsabilidade de negócio:
+
+- users
+- accounts
+- operations
+
+Essa organização reduz o acoplamento entre módulos e facilita futuras expansões do sistema.
+
+---
+
+# Princípios aplicados
+
+- Programação Orientada a Objetos (POO)
 - Encapsulamento
-- Responsabilidade Única (SRP)
 - Composição entre objetos
-- Baixo acoplamento
+- Herança
+- Modularização
+- Responsabilidade Única (SRP)
 - Alta coesão
-- Modularização por domínio
+- Baixo acoplamento
+- Separação de responsabilidades

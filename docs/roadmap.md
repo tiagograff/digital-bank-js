@@ -1,46 +1,82 @@
 # Roadmap
 
-## Fase 1
+Este roadmap apresenta a evolução do projeto e seu estado atual.
 
-- Estrutura do projeto
-- Classes
-- Relacionamentos
-- Modelagem do domínio
+O objetivo principal foi praticar **Programação Orientada a Objetos (POO)** utilizando JavaScript e modelar um domínio bancário de forma organizada.
 
 ---
 
-## Fase 2
+# Status do projeto
 
-- Implementação das regras de negócio
-- Testes em ambiente Node
-- Refatorações
+**Versão atual:** `v1.0.0`
 
----
-
-## Fase 3
-
-- Interface HTML
-- CSS
-- Manipulação do DOM
+**Status:** Projeto concluído para os objetivos de estudo propostos.
 
 ---
 
-## Fase 4
+# Fase 1 — Estrutura da aplicação
 
-- Babel
-- Webpack
-- Build de produção
-
----
-
-## Fase 5
-
-- Deploy no GitHub Pages
+- [x] Configuração inicial do projeto
+- [x] Organização utilizando ES Modules
+- [x] Estrutura modular
+- [x] Geração de identificadores
+- [x] Classe `App`
 
 ---
 
-## Melhorias futuras
+# Fase 2 — Modelagem do domínio
 
-- API REST
-- Login
-- Testes automatizados
+## Usuários
+
+- [x] Classe `User`
+- [x] Classe `Admin`
+- [x] Associação entre usuário e conta
+
+## Contas
+
+- [x] Classe `Account`
+- [x] Controle de saldo
+- [x] Histórico de operações
+
+## Operações
+
+- [x] Depósitos
+- [x] Transferências
+
+## Empréstimos
+
+- [x] Classe `Loan`
+- [x] Classe `Installment`
+- [x] Cálculo de juros
+- [x] Geração automática de parcelas
+- [x] Pagamento de parcelas
+- [x] Controle de status
+
+## Validações
+
+- [x] Busca de usuários
+- [x] Busca de contas
+- [x] Validação de entidades
+- [x] Tratamento de exceções
+
+---
+
+# Evoluções futuras (não planejadas para a versão atual)
+
+Estas funcionalidades não fazem parte do escopo atual do projeto, mas podem ser exploradas futuramente como evolução ou em uma nova versão.
+
+- [ ] Persistência de dados (JSON ou banco de dados)
+- [ ] API REST
+- [ ] Interface Web
+- [ ] Testes automatizados
+- [ ] Sistema de autenticação
+- [ ] Histórico completo de transações
+- [ ] Novos produtos financeiros
+
+---
+
+# Considerações
+
+O desenvolvimento foi encerrado na versão **1.0.0**, pois os objetivos de aprendizado relacionados à Programação Orientada a Objetos foram atingidos.
+
+As funcionalidades listadas como evoluções futuras representam apenas possibilidades para uma nova etapa do projeto e não fazem parte do escopo da versão atual.
