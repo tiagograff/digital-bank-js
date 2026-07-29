@@ -4,7 +4,7 @@ import Admin from "../modules/users/Admin.js";
 import { generateNumericIdOperations } from "../utils/generateNumericId.js";
 const accounts = [];
 
-class App{
+class App {
   constructor() {
     this.admin = new Admin("Admin", "admin@admin.com");
   }
@@ -33,6 +33,18 @@ class App{
     return accounts.find((account) => account.id === userId);
   }
 
+  static findUserByEmail(userEmail) {
+    return accounts.find((account) => account.email === account.email);
+  }
+
+  static validatedEmail(email) {
+    if (accounts.includes((account) => account.email === email)) {
+      throw new Error("Este email já está em uso");
+    } else {
+      return true;
+    }
+  }
+
   static hasAccount(id) {
     return accounts.some((account) => account.nroAccount === id);
   }
@@ -49,8 +61,8 @@ class App{
     return requester.loans.some((loan) => loan.id === id);
   }
 
-  static findLoanById(user, loanId){
-    return user.loans.find((loan => loan.id === loanId))
+  static findLoanById(user, loanId) {
+    return user.loans.find((loan) => loan.id === loanId);
   }
 
   static valueValidator(value) {

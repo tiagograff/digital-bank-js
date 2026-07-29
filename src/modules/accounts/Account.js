@@ -36,8 +36,8 @@ export default class Account extends User {
     this.#balance += value
   }
 
-  transfer(recipientUser, value){
-    // const recipientUser = App.findUserById(recipientUserId)
+  transfer(recipientUserEmail, value){
+    const recipientUser = App.findUserByEmail(recipientUserEmail)
     const newTransfer = new Transfer(this.name, recipientUser.name, value)
     if (App.valueValidator(newTransfer.value)){
       this.#balance -= value
