@@ -8,7 +8,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "start": "node ./src/index.js"
+    "dev": "node ./src/index.js",
+    "server": "json-server --watch src/database/db.json --port 3000"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   "homepage": "https://github.com/tiagograff/digital-bank-js#readme",
   "dependencies": {
     "dayjs": "^1.11.21",
+    "json-server": "^1.0.0-beta.15",
     "nanoid": "^6.0.0"
   }
 }
