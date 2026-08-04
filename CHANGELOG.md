@@ -108,3 +108,17 @@ As seguintes melhorias podem ser implementadas futuramente:
 - API REST.
 - Testes automatizados.
 - Sistema de autenticação.
+
+## [0.2.0] - Em desenvolvimento
+
+### Adicionado
+
+- Integração com json-server
+- Estrutura inicial de persistência
+- Comunicação assíncrona utilizando Fetch API
+- Interface HTML para gerenciamento das transações
+
+### Alterado
+
+- Evolução da arquitetura para suportar persistência externa
+- IDs passam a ser gerados pela API

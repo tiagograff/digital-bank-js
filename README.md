@@ -4,9 +4,13 @@ Projeto desenvolvido com foco em **Programação Orientada a Objetos (POO)** uti
 
 > Projeto de estudo focado em Programação Orientada a Objetos (POO) utilizando JavaScript puro, sem frameworks.
 
-O objetivo deste projeto é simular operações de um banco digital aplicando conceitos fundamentais de desenvolvimento orientado a objetos, como encapsulamento, composição, herança, modularização e separação de responsabilidades.
+O Digital Bank JS é um projeto desenvolvido com JavaScript moderno utilizando Programação Orientada a Objetos.
 
-Mais do que implementar funcionalidades bancárias, o projeto busca representar um domínio de negócio através de uma arquitetura organizada e escalável.
+Inicialmente o objetivo era modelar um sistema bancário utilizando classes, encapsulamento, herança, composição e módulos ES.
+
+A partir desta versão, o projeto passa a evoluir para uma aplicação mais próxima de um ambiente real, adicionando persistência de dados através do **json-server**, comunicação com uma API REST utilizando **Fetch API** e uma interface web responsável por consumir e exibir as operações da aplicação.
+
+Essa evolução permite aplicar conceitos modernos do ecossistema JavaScript mantendo a arquitetura orientada a objetos construída desde as primeiras versões.
 
 > Este projeto faz parte da minha jornada de estudos em Desenvolvimento Full Stack JavaScript.
 
@@ -25,6 +29,8 @@ Mais do que implementar funcionalidades bancárias, o projeto busca representar 
 
 ## Funcionalidades
 
+## Sistema Bancário
+
 - Cadastro de usuários
 - Criação automática de contas bancárias
 - Depósitos
@@ -36,6 +42,18 @@ Mais do que implementar funcionalidades bancárias, o projeto busca representar 
 - Histórico de operações
 - Validação de entidades e operações
 
+### Persistência
+
+- Simulação de API REST utilizando json-server
+- Operações assíncronas utilizando Fetch API
+- Persistência em arquivo JSON
+
+### Interface
+
+- Listagem de transações
+- Cadastro de novas transações
+- Atualização automática da interface
+- Atualização dinâmica do saldo
 ---
 
 ## Conceitos praticados
@@ -57,8 +75,13 @@ Mais do que implementar funcionalidades bancárias, o projeto busca representar 
 ## Tecnologias
 
 - JavaScript (ES Modules)
-- Node.js
-- npm
+- HTML5
+- CSS3
+- Fetch API
+- Async / Await
+- Promises
+- json-server
+- Day.js
 
 ---
 
@@ -113,9 +136,9 @@ npm start
 
 Embora o objetivo principal tenha sido a prática de POO, algumas evoluções podem ser implementadas futuramente:
 
-- Interface Web
-- API REST
-- Persistência de dados
+- Interface Web [Em andamento]
+- API REST [Em andamento]
+- Persistência de dados [Em andamento]
 - Testes automatizados
 - Autenticação de usuários
 

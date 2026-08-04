@@ -178,3 +178,38 @@ Separar claramente:
 Este projeto teve como objetivo principal praticar conceitos de Programação Orientada a Objetos utilizando JavaScript.
 
 As decisões registradas neste documento refletem o processo de aprendizado durante o desenvolvimento e representam a solução considerada mais adequada para o escopo atual do projeto.
+
+# ADR-002 — Adoção do json-server
+
+## Contexto
+
+A primeira versão do projeto armazenava todos os objetos apenas em memória durante a execução.
+
+Para aproximar a aplicação de um cenário real e permitir o estudo de comunicação cliente-servidor, tornou-se necessário introduzir uma camada de persistência.
+
+## Decisão
+
+Foi adotado o json-server para simular uma API REST.
+
+Essa escolha permite utilizar:
+
+- Fetch API
+- Async/Await
+- Promises
+- Métodos HTTP
+- Manipulação de JSON
+
+sem a necessidade de implementar um backend completo nesta etapa do projeto.
+
+## Consequências
+
+### Positivas
+
+- Arquitetura mais próxima de aplicações reais.
+- Separação entre domínio e persistência.
+- Facilidade para migração futura para Express ou outro backend.
+
+### Negativas
+
+- Dependência de uma API simulada.
+- Algumas regras permanecem sendo executadas apenas no cliente.
