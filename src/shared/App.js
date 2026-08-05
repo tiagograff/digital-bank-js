@@ -1,6 +1,7 @@
 import Loan from "../modules/accounts/Loan.js";
 import Operations from "../modules/operations/Operations.js";
 import Admin from "../modules/users/Admin.js";
+import getUsers from "../services/user.service.js";
 import { generateNumericIdOperations } from "../utils/generateNumericId.js";
 const accounts = [];
 
@@ -33,8 +34,9 @@ class App {
     return accounts.find((account) => account.id === userId);
   }
 
-  static findUserByEmail(userEmail) {
-    return accounts.find((account) => account.email === account.email);
+  static  async findUserByEmail(userEmail) {
+    const dataUsers = await getUsers()
+    return dataUsers.find((user) => user.email === userEmail);
   }
 
   static validatedEmail(email) {

@@ -1,4 +1,4 @@
-import { customAlphabet } from "nanoid";
+import { nanoid } from 'https://esm.sh/nanoid'
 
 const numbers = '0123456789'
 

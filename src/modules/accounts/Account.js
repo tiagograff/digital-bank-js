@@ -1,7 +1,7 @@
 import { App } from "../../shared/App.js";
 import Deposit from "../operations/implementations/Deposit.js";
 import User from "../users/User.js";
-import dayjs from "dayjs";
+import dayjs from 'https://esm.sh/dayjs'
 import Loan from "./Loan.js";
 import Transfer from "../operations/implementations/Transfer.js";
 

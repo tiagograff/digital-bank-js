@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import dayjs from 'https://esm.sh/dayjs'
 
 export default class Operations {
   constructor() {

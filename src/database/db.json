@@ -1,9 +1,12 @@
 {
-    "transactions": [
+    "users": [
         {
-            "id": null,
-            "name": null,
-            "value": null
+            "name": "john_doe",
+            "email": "admin@email.com",
+            "password": "admin@123",
+            "type": "Admin",
+            "aprovations": [],
+            "refusals": []
         }
     ]
 }
